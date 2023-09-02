@@ -1,4 +1,5 @@
 import React from "react";
+// import { DataContext } from "../../App";
 
 const Header = () => {
   const titleStyle = {
@@ -7,6 +8,8 @@ const Header = () => {
     textAlign: "center",
     margin: 0,
   };
+
+  // const angkaContext = useContext(DataContext);
 
   return (
     <div className="header">
