@@ -1,4 +1,5 @@
 import Card from "react-bootstrap/Card";
+import { AiFillDelete } from "react-icons/ai";
 
 const ContactCard = (props) => {
   return (
@@ -10,7 +11,11 @@ const ContactCard = (props) => {
           {props.info} - {props.alamat}
         </Card.Text>
         <Card.Link href="#">Card Link</Card.Link>
-        <Card.Link href="#">Another Link</Card.Link>
+        <AiFillDelete
+          size={25}
+          onClick={() => props.handleDeleteContact(props.id)}
+          cursor="pointer"
+        />
       </Card.Body>
     </Card>
   );

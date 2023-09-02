@@ -1,14 +1,24 @@
 import React, { useEffect, useState } from "react";
 import ContentStyle from "../../assets/styles/Content.module.css";
 import ContactCard from "../ContactCard";
-import { data } from "../../utils/data";
+import { GetAllContacts, DeleteContactById } from "../../utils/api";
 
 const Content = () => {
   const [dataContacts, setDataContacts] = useState([]);
+  const [triggerData, setTriggerData] = useState(false);
+
+  const handleGetAllContacts = async () => {
+    await GetAllContacts().then((response) => setDataContacts(response.data));
+  };
+
+  const handleDeleteContact = async (id) => {
+    await DeleteContactById(id);
+    setTriggerData(!triggerData);
+  };
 
   useEffect(() => {
-    setDataContacts(data);
-  }, []);
+    handleGetAllContacts();
+  }, [triggerData]);
 
   return (
     <div className="content">
@@ -22,6 +32,8 @@ const Content = () => {
             nomor={contact.nomor}
             info={contact.info}
             alamat={contact.alamat}
+            id={contact.id}
+            handleDeleteContact={handleDeleteContact}
           />
         ))}
       </div>
