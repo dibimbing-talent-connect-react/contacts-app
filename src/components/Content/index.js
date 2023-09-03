@@ -4,12 +4,15 @@ import ContactCard from "../ContactCard";
 import { GetAllContacts, DeleteContactById } from "../../utils/api";
 import { Button } from "react-bootstrap";
 import ModalAddContact from "../ModalAddContact";
-import FormAddContact from "../FormAddContact";
 
 const Content = () => {
   const [dataContacts, setDataContacts] = useState([]);
+  const [dataContact, setDataContact] = useState({});
   const [triggerData, setTriggerData] = useState(false);
   const [show, setShow] = useState(false);
+
+  const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
 
   const handleGetAllContacts = async () => {
     await GetAllContacts().then((response) => setDataContacts(response.data));
@@ -20,7 +23,10 @@ const Content = () => {
     setTriggerData(!triggerData);
   };
 
-  const handleShow = () => setShow(!show);
+  const getDataContact = (data) => {
+    setDataContact(data);
+    handleShow();
+  };
 
   useEffect(() => {
     handleGetAllContacts();
@@ -28,22 +34,23 @@ const Content = () => {
 
   return (
     <div className="content">
-      {/* <ModalAddContact show={show} handleClose={handleClose} /> */}
+      <ModalAddContact
+        show={show}
+        handleClose={handleClose}
+        triggerData={triggerData}
+        setTriggerData={setTriggerData}
+        dataContact={dataContact}
+        setDataContact={setDataContact}
+      />
 
-      {/* CSS module */}
+      <div className="d-flex justify-content-between mb-3">
+        {/* CSS module */}
+        <h2 styles={ContentStyle.title}>Contacts List</h2>
 
-      <Button variant="primary" onClick={handleShow}>
-        Add contact
-      </Button>
-
-      {show && (
-        <FormAddContact
-          triggerData={triggerData}
-          setTriggerData={setTriggerData}
-        />
-      )}
-
-      <h2 styles={ContentStyle.title}>Contacts List</h2>
+        <Button variant="primary" onClick={handleShow}>
+          Add contact
+        </Button>
+      </div>
       <div className="contacts-list">
         {dataContacts.map((contact, index) => (
           <ContactCard
@@ -54,6 +61,7 @@ const Content = () => {
             alamat={contact.alamat}
             id={contact.id}
             handleDeleteContact={handleDeleteContact}
+            getDataContact={getDataContact}
           />
         ))}
       </div>

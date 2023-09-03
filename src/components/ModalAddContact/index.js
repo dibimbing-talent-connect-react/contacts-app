@@ -1,36 +1,40 @@
 import React from "react";
-import { Button, Form, Modal } from "react-bootstrap";
+import { Modal } from "react-bootstrap";
+import FormAddContact from "../FormContact/AddContact";
+import FormEditContact from "../FormContact/EditContact";
 
-const ModalAddContact = (show, handleClose) => {
+const ModalAddContact = ({
+  show,
+  handleClose,
+  triggerData,
+  setTriggerData,
+  dataContact,
+  setDataContact,
+}) => {
   return (
-    <Modal show={show} onHide={handleClose}>
+    <Modal show={show} onHide={() => handleClose()} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Title>
+          {dataContact.nama ? "Edit Contact" : "Add Contact"}
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
-        <Form>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-            <Form.Label>Email address</Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="name@example.com"
-              autoFocus
-            />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
-            <Form.Label>Example textarea</Form.Label>
-            <Form.Control as="textarea" rows={3} />
-          </Form.Group>
-        </Form>
+        {dataContact.nama ? (
+          <FormEditContact
+            triggerData={triggerData}
+            setTriggerData={setTriggerData}
+            handleCloseModal={handleClose}
+            dataContact={dataContact}
+            setDataContact={setDataContact}
+          />
+        ) : (
+          <FormAddContact
+            triggerData={triggerData}
+            setTriggerData={setTriggerData}
+            handleCloseModal={handleClose}
+          />
+        )}
       </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={handleClose}>
-          Close
-        </Button>
-        <Button variant="primary" onClick={handleClose}>
-          Save Changes
-        </Button>
-      </Modal.Footer>
     </Modal>
   );
 };

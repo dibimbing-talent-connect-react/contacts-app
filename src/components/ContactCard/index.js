@@ -10,7 +10,19 @@ const ContactCard = (props) => {
         <Card.Text>
           {props.info} - {props.alamat}
         </Card.Text>
-        <AiTwotoneEdit size={25} cursor="pointer" />
+        <AiTwotoneEdit
+          size={25}
+          cursor="pointer"
+          onClick={() =>
+            props.getDataContact({
+              nama: props.nama,
+              nomor: props.nomor,
+              info: props.info,
+              alamat: props.alamat,
+              id: props.id,
+            })
+          }
+        />
         <AiFillDelete
           size={25}
           onClick={() => props.handleDeleteContact(props.id)}

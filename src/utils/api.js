@@ -13,3 +13,7 @@ export const DeleteContactById = (id) => {
 export const AddContact = (data) => {
   return axios.post(`${baseUrl}/contacts`, data);
 };
+
+export const EditContact = (data) => {
+  return axios.put(`${baseUrl}/contacts/${data.id}`, data);
+};

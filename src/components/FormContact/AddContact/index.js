@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
-import { AddContact } from "../../utils/api";
+import { Button, Form, Modal } from "react-bootstrap";
+import { AddContact } from "../../../utils/api";
 
-const FormAddContact = ({ triggerData, setTriggerData }) => {
+const FormAddContact = ({ triggerData, setTriggerData, handleCloseModal }) => {
   const [formData, setFormData] = useState({
     nama: "",
     alamat: "",
@@ -14,7 +14,8 @@ const FormAddContact = ({ triggerData, setTriggerData }) => {
     e.preventDefault();
     await AddContact(formData);
     setFormData({ nama: "", alamat: "", nomor: "", info: "" });
-    setTriggerData(!triggerData)
+    setTriggerData(!triggerData);
+    handleCloseModal();
   };
 
   return (
@@ -63,9 +64,14 @@ const FormAddContact = ({ triggerData, setTriggerData }) => {
           }
         />
       </Form.Group>
-      <Button variant="primary" type="submit">
-        Submit
-      </Button>
+      <Modal.Footer>
+        <Button variant="secondary" onClick={handleCloseModal}>
+          Close
+        </Button>
+        <Button variant="primary" type="submit">
+          Add Contact
+        </Button>
+      </Modal.Footer>
     </Form>
   );
 };
