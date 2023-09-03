@@ -1,15 +1,18 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import ContentStyle from "../../assets/styles/Content.module.css";
 import ContactCard from "../../components/ContactCard";
 import { GetAllContacts, DeleteContactById } from "../../utils/api";
 import { Button } from "react-bootstrap";
 import ModalAddContact from "../../components/ModalAddContact";
+import { DataContext } from "../../App";
 
 const Home = () => {
   const [dataContacts, setDataContacts] = useState([]);
   const [dataContact, setDataContact] = useState({});
   const [triggerData, setTriggerData] = useState(false);
   const [show, setShow] = useState(false);
+
+  const dataLogin = useContext(DataContext);
 
   const handleShow = () => setShow(true);
   const handleClose = () => setShow(false);
@@ -47,9 +50,11 @@ const Home = () => {
         {/* CSS module */}
         <h2 styles={ContentStyle.title}>Contacts List</h2>
 
-        <Button variant="primary" onClick={handleShow}>
-          Add contact
-        </Button>
+        {dataLogin.isLogin && (
+          <Button variant="primary" onClick={handleShow}>
+            Add contact
+          </Button>
+        )}
       </div>
       <div className="contacts-list">
         {dataContacts.map((contact, index) => (

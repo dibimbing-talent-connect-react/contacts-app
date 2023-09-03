@@ -17,3 +17,7 @@ export const AddContact = (data) => {
 export const EditContact = (data) => {
   return axios.put(`${baseUrl}/contacts/${data.id}`, data);
 };
+
+export const Login = (data) => {
+  return axios.post(`${baseUrl}/auth/login`, data);
+};

@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-// import { DataContext } from "../../App";
+import ModalLogin from "../ModalLogin";
 
 const Header = () => {
+  const [showModalLogin, setShowModalLogin] = useState(false);
+
+  const handleShowModalLogin = () => setShowModalLogin(true);
+  const handleCloseModalLogin = () => setShowModalLogin(false);
+
   const titleStyle = {
     color: "black",
     fontWeight: "bolder",
@@ -15,9 +20,12 @@ const Header = () => {
 
   return (
     <div className="header">
+      <ModalLogin show={showModalLogin} handleClose={handleCloseModalLogin} />
+
       {/* inline style css */}
       <h1 style={titleStyle}>Contacts App</h1>
       <div>
+        <span onClick={handleShowModalLogin}>Login</span>
         <Link to="/">
           <span className="mx-3">Home</span>
         </Link>

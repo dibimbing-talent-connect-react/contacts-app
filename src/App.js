@@ -9,7 +9,8 @@ import Favorites from "./pages/Favorites";
 export const DataContext = createContext();
 
 function App() {
-  const [angka, setAngka] = useState(0);
+  // const [angka, setAngka] = useState(0);
+  const [isLogin, setIsLogin] = useState(false)
 
   // let angka = 0;
 
@@ -21,7 +22,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <DataContext.Provider value={{ angka, setAngka }}>
+      <DataContext.Provider value={{ isLogin, setIsLogin }}>
         <div className="App">
           <Header />
           {/* <h1>{angka}</h1> */}
