@@ -8,11 +8,16 @@ body {
 .header {
   width: 100%;
   color: black;
-  height: 50px;
+  height: 100%;
   background-color: lightblue;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 20px;
+}
+
+.header span {
+  font-size: 18px;
 }
 
 .content {

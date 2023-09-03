@@ -2,7 +2,9 @@ import { useState, createContext } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/styles/index.css"; //css file stylesheet
 import Header from "./components/Header";
-import Content from "./components/Content";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Home from "./pages/Home";
+import Favorites from "./pages/Favorites";
 
 export const DataContext = createContext();
 
@@ -12,20 +14,26 @@ function App() {
   // let angka = 0;
 
   // const tambahAngka = () => {
-    //   angka = angka + 1;
-    //   console.log(angka);
-    // setAngka(angka + 1);
+  //   angka = angka + 1;
+  //   console.log(angka);
+  // setAngka(angka + 1);
   // };
 
   return (
-    <DataContext.Provider value={{ angka, setAngka }}>
-      <div className="App">
-        <Header />
-        <Content />
-        {/* <h1>{angka}</h1> */}
-        {/* <button onClick={tambahAngka}>Tambah Angka</button> */}
-      </div>
-    </DataContext.Provider>
+    <BrowserRouter>
+      <DataContext.Provider value={{ angka, setAngka }}>
+        <div className="App">
+          <Header />
+          {/* <h1>{angka}</h1> */}
+          {/* <button onClick={tambahAngka}>Tambah Angka</button> */}
+
+          <Routes>
+            <Route element={<Home />} path="/" />
+            <Route element={<Favorites />} path="/favorite-contacts" />
+          </Routes>
+        </div>
+      </DataContext.Provider>
+    </BrowserRouter>
   );
 }
 

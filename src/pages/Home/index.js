@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import ContentStyle from "../../assets/styles/Content.module.css";
-import ContactCard from "../ContactCard";
+import ContactCard from "../../components/ContactCard";
 import { GetAllContacts, DeleteContactById } from "../../utils/api";
 import { Button } from "react-bootstrap";
-import ModalAddContact from "../ModalAddContact";
+import ModalAddContact from "../../components/ModalAddContact";
 
-const Content = () => {
+const Home = () => {
   const [dataContacts, setDataContacts] = useState([]);
   const [dataContact, setDataContact] = useState({});
   const [triggerData, setTriggerData] = useState(false);
@@ -69,4 +69,4 @@ const Content = () => {
   );
 };
 
-export default Content;
+export default Home;
