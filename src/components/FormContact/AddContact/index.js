@@ -8,6 +8,7 @@ const FormAddContact = ({ triggerData, setTriggerData, handleCloseModal }) => {
     alamat: "",
     nomor: "",
     info: "",
+    favorite: false,
   });
 
   const submitForm = async (e) => {
