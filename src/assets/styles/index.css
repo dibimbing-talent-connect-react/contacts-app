@@ -21,7 +21,8 @@ body {
   cursor: pointer;
 }
 
-.content {
+.content,
+.favorite-contacts {
   margin: 100px 200px;
 }
 
@@ -33,7 +34,7 @@ body {
 }
 
 .card {
-  box-shadow: 8px 8px 5px -7px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 8px 8px 5px -7px rgba(0,0,0,0.75);
-  -moz-box-shadow: 8px 8px 5px -7px rgba(0,0,0,0.75);
+  box-shadow: 8px 8px 5px -7px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 8px 8px 5px -7px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 8px 8px 5px -7px rgba(0, 0, 0, 0.75);
 }

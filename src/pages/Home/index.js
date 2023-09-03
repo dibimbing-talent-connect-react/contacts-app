@@ -1,7 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
 import ContentStyle from "../../assets/styles/Content.module.css";
 import ContactCard from "../../components/ContactCard";
-import { GetAllContacts, DeleteContactById } from "../../utils/api";
+import {
+  GetAllContacts,
+  DeleteContactById,
+  AddToFavoriteContact,
+} from "../../utils/api";
 import { Button } from "react-bootstrap";
 import ModalAddContact from "../../components/ModalAddContact";
 import { DataContext } from "../../App";
@@ -23,6 +27,18 @@ const Home = () => {
 
   const handleDeleteContact = async (id) => {
     await DeleteContactById(id);
+    setTriggerData(!triggerData);
+  };
+
+  const handleFavoriteContact = async (data) => {
+    const dataBody = {
+      id: data.id,
+      data: {
+        favorite: !data.favorite,
+      },
+    };
+
+    await AddToFavoriteContact(dataBody);
     setTriggerData(!triggerData);
   };
 
@@ -64,8 +80,10 @@ const Home = () => {
             nomor={contact.nomor}
             info={contact.info}
             alamat={contact.alamat}
+            favorite={contact.favorite}
             id={contact.id}
             handleDeleteContact={handleDeleteContact}
+            handleFavoriteContact={handleFavoriteContact}
             getDataContact={getDataContact}
           />
         ))}

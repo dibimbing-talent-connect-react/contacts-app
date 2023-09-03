@@ -4,13 +4,17 @@ import "./assets/styles/index.css"; //css file stylesheet
 import Header from "./components/Header";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
-import Favorites from "./pages/Favorites";
+import FavoriteContacts from "./pages/FavoriteContacts";
+import Cookies from "js-cookie";
+import ProtectedRoute from "./route/ProtectedRoute";
 
 export const DataContext = createContext();
 
 function App() {
   // const [angka, setAngka] = useState(0);
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(
+    Cookies.get("access_token") ? true : false
+  );
 
   // let angka = 0;
 
@@ -30,7 +34,9 @@ function App() {
 
           <Routes>
             <Route element={<Home />} path="/" />
-            <Route element={<Favorites />} path="/favorite-contacts" />
+            <Route element={<ProtectedRoute />}>
+              <Route element={<FavoriteContacts />} path="/favorite-contacts" />
+            </Route>
           </Routes>
         </div>
       </DataContext.Provider>
